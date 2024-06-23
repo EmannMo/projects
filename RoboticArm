@@ -1,0 +1,44 @@
+https://photos.app.goo.gl/LaaeC3f92YWvAK9v9
+
+code:
+#include <SoftwareSerial.h>
+#include <Servo.h>
+#define a5 20
+Servo base;
+Servo shoulder;
+Servo elbow;
+Servo wrist;
+Servo grip;
+Servo finger;
+SoftwareSerial myserial (0,1);
+
+void setup()
+{ finger.attach (7);
+  base.attach(4);
+shoulder.attach(6);
+elbow.attach(8);
+wrist.attach(9);
+grip.attach(10);
+myserial.begin (9600);
+}
+
+void loop() {   base.write(90);
+shoulder.write(90);
+elbow.write(90);
+wrist.write(90);
+grip.write(90);
+switch (myserial.read()) {
+case('F'):{base.write(180); delay (a5);} break;
+case('B') :{base.write(0); delay (a5);} break;
+case('Q'):{shoulder.write(0); delay (a5);} break;
+case('L') :{shoulder.write(180); delay (a5);} break;
+case('H'):{elbow.write(0); delay (a5);} break;
+case('I') :{elbow.write(180); delay (a5);} break;
+case('G'):{wrist.write(0); delay (a5);} break;
+case('J') :{wrist.write(180); delay (a5);} break;
+case('w'):{finger.write(0); delay (a5); break;} break;
+case('W') :{finger.write(180); delay (a5); break;} break;
+case('U'):{grip.write(180); delay (a5);} break;
+case('s') :{grip.write(0); delay (a5);} break;
+}
+}
